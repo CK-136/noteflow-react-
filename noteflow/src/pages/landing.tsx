@@ -1,7 +1,36 @@
 import img1 from "../images/landing/intro/Gemini_Generated_Image_3q5xfo3q5xfo3q5x (1).svg";
 import img2 from "../images/landing/intro/Gemini_Generated_Image_f81gnxf81gnxf81g (1).svg";
 import img3 from "../images/landing/intro/Gemini_Generated_Image_yxhb1uyxhb1uyxhb (1).svg";
+import logo1 from "../images/landing/trust/logoipsum-372 (1).svg";
+import logo1d from "../images/landing/trust/logoipsum-372.svg";
+import logo2 from "../images/landing/trust/logoipsum-378 (1).svg";
+import logo2d from "../images/landing/trust/logoipsum-378.svg";
+import logo3 from "../images/landing/trust/logoipsum-408 (1).svg";
+import logo3d from "../images/landing/trust/logoipsum-408.svg";
+import logo4 from "../images/landing/trust/logoipsum-414 (1).svg";
+import logo4d from "../images/landing/trust/logoipsum-414.svg";
+import { useState, useEffect } from "react";
 export default function Landing() {
+
+  type theme = "light" | "dark";
+  const getInitTheme = (): theme => {
+    if (
+      typeof window !== undefined &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches
+    ) {
+      return "dark";
+    }
+    return "light";
+  };
+  const [theme, setTheme] = useState<theme>(getInitTheme);
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    const handleTheme = (e: MediaQueryListEvent) => {
+      setTheme(e.matches ? "dark" : "light");
+    };
+    mediaQuery.addEventListener("change", handleTheme);
+  }, []);
+
   return (
     <>
       <div className=' flex w-full h-[90svh] overflow-hidden justify-between px-24'>
@@ -40,12 +69,26 @@ export default function Landing() {
           />
         </div>
       </div>
-      <div className='w-full dark:bg-sky-600'>
+      <div className='w-full dark:bg-sky-900'>
         <h4 className='text-lg font-bold tracking-tight text-center py-6'>
           TRUSTED BY
         </h4>
-        <div className='flex justify-between text-white p-6'>
-
+        <div className='flex justify-between text-white px-6 pb-10'>
+          {theme === "dark" ? (
+            <>
+              <img src={logo1} alt='' />
+              <img src={logo2} alt='' />
+              <img src={logo3} alt='' />
+              <img src={logo4} alt='' />
+            </>
+          ) : (
+            <>
+              <img src={logo1d} alt='' />
+              <img src={logo2d} alt='' />
+              <img src={logo3d} alt='' />
+              <img src={logo4d} alt='' />
+            </>
+          )}
         </div>
       </div>
       <div>
